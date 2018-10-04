@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updateDescriptor baseUrl="">
+  <entry targetMediaFileId="58" updatableVersionMin="" updatableVersionMax="" fileName="ColourClicks_windows-x64_1_0.exe" newVersion="1.0" newMediaFileId="58" fileSize="3008000" md5Sum="a6145a2d4b141344de00d4b5a93d2277" bundledJre="" archive="false" singleBundle="false">
+    <comment language="en" />
+  </entry>
+</updateDescriptor>

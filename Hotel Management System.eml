@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/Hotel Management System"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="sql" scope="RUNTIME"/>
+	<levels>
+		<level name="sql" value="project"/>
+		<level name="src" value="project"/>
+	</levels>
+</component>

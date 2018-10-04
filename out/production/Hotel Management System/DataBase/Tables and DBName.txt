@@ -1,0 +1,284 @@
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 26
+Server version: 10.1.13-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW Databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| myhotel            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| testdbapp          |
++--------------------+
+6 rows in set (0.12 sec)
+
+MariaDB [myhotel]> use information_schema;
+Database changed
+
+MariaDB [information_schema]> Select TABLE_NAME from views;
++---------------------+
+| TABLE_NAME          |
++---------------------+
+| booked_rooms        |
+| food_orders         |
+| occupied_rooms      |
+| product_supplier    |
+| room_food_customers |
++---------------------+
+5 rows in set (1.51 sec)
+MariaDB [information_schema]> USE myhotel;
+Database changed
+
+MariaDB [myhotel]> SHOW TABLES;
++---------------------+
+| Tables_in_myhotel   |
++---------------------+
+| assets              |
+| booked_rooms        |
+| employee            |
+| food_customers      |
+| food_menu           |
+| food_orders         |
+| occupied_rooms      |
+| picked_product      |
+| product             |
+| product_supplier    |
+| room_customers      |
+| room_food_customers |
+| rooms               |
+| suppliers           |
+| user_account        |
++---------------------+
+15 rows in set (0.01 sec)
+
+MariaDB [myhotel]> Describe employee;
++---------------------+--------------+------+-----+---------+----------------+
+| Field               | Type         | Null | Key | Default | Extra          |
++---------------------+--------------+------+-----+---------+----------------+
+| Surname             | varchar(20)  | NO   |     | NULL    |                |
+| FirstName           | varchar(20)  | NO   |     | NULL    |                |
+| OtherName           | varchar(20)  | YES  |     | NULL    |                |
+| NationalIndentityNo | int(11)      | NO   | UNI | NULL    |                |
+| DateOfBirth         | date         | NO   |     | NULL    |                |
+| HomeAdress          | varchar(50)  | NO   |     | NULL    |                |
+| PhoneNo             | int(11)      | NO   |     | NULL    |                |
+| EmergencyPhoneNo    | int(11)      | YES  |     | NULL    |                |
+| Email               | varchar(50)  | YES  | UNI | NULL    |                |
+| EducationLevel      | varchar(30)  | NO   |     | NULL    |                |
+| Department          | varchar(30)  | NO   |     | NULL    |                |
+| PhotoPath           | varchar(400) | YES  |     | NULL    |                |
+| EmployeeNo          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| CVPath              | varchar(400) | YES  |     | NULL    |                |
+| ScanNationIDPath    | varchar(400) | YES  |     | NULL    |                |
+| UserName            | varchar(100) | YES  | UNI | NULL    |                |
+| employementDate     | date         | YES  |     | NULL    |                |
++---------------------+--------------+------+-----+---------+----------------+
+17 rows in set (0.08 sec)
+
+MariaDB [myhotel]> Describe food_customers;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| Customer_ID      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Time             | time        | NO   |     | NULL    |                |
+| Date             | date        | NO   |     | NULL    |                |
+| State            | varchar(20) | NO   |     | NULL    |                |
+| Food_ID          | int(11)     | YES  | MUL | NULL    |                |
+| Quantity         | float       | YES  |     | NULL    |                |
+| Customer         | mediumtext  | YES  |     | NULL    |                |
+| Customer_Room_ID | int(11)     | YES  | MUL | NULL    |                |
+| Amount_Paid      | float       | YES  |     | NULL    |                |
+| Served_By        | varchar(30) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+10 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe food_menu;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| food_ID   | int(11)     | NO   | PRI | NULL    |       |
+| food_name | varchar(50) | NO   |     | NULL    |       |
+| price     | float       | NO   |     | NULL    |       |
+| quantity  | int(11)     | YES  |     | NULL    |       |
+| category  | varchar(50) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe room_customers;
++--------------------+-------------+------+-----+---------+----------------+
+| Field              | Type        | Null | Key | Default | Extra          |
++--------------------+-------------+------+-----+---------+----------------+
+| Customer_ID        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Names              | varchar(50) | YES  |     | NULL    |                |
+| Room_No            | int(11)     | NO   | MUL | NULL    |                |
+| Check_In_Date      | date        | NO   |     | NULL    |                |
+| Check_Out_Date     | date        | YES  |     | NULL    |                |
+| Room_Total_Price   | float       | YES  |     | NULL    |                |
+| Food_Total_Payment | float       | YES  |     | NULL    |                |
+| Extra_Payments     | float       | YES  |     | NULL    |                |
+| Checked_Out_By     | varchar(50) | YES  |     | NULL    |                |
+| Checked_In_By      | varchar(50) | YES  |     | NULL    |                |
+| National_ID        | int(11)     | YES  |     | NULL    |                |
+| State              | varchar(20) | NO   |     | NULL    |                |
++--------------------+-------------+------+-----+---------+----------------+
+12 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe rooms;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| Room_No         | int(11)     | NO   | PRI | NULL    |       |
+| Room_Type       | varchar(20) | NO   |     | NULL    |       |
+| Price_Per_Night | float       | NO   |     | NULL    |       |
+| State           | varchar(20) | NO   |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+MariaDB [myhotel]> Describe assets;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| assets_id  | int(11)      | NO   | PRI | NULL    | auto_increment |
+| asset_name | varchar(100) | NO   |     | NULL    |                |
+| unit       | int(11)      | NO   |     | NULL    |                |
+| location   | varchar(50)  | YES  |     | NULL    |                |
+| cost       | float        | YES  |     | NULL    |                |
+| Status     | varchar(50)  | YES  |     | NULL    |                |
+| category   | varchar(50)  | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.08 sec)
+
+MariaDB [myhotel]> Describe picked_product;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| product_id  | int(11)      | YES  | MUL | NULL    |                |
+| unit        | int(11)      | NO   |     | NULL    |                |
+| purpose     | varchar(100) | NO   |     | NULL    |                |
+| picked_by   | varchar(100) | NO   |     | NULL    |                |
+| given_by    | varchar(100) | NO   |     | NULL    |                |
+| picked_date | date         | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe product;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| product_id    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| product_name  | varchar(100) | NO   |     | NULL    |                |
+| unit          | int(11)      | NO   |     | NULL    |                |
+| category      | varchar(50)  | NO   |     | NULL    |                |
+| alert_unit    | int(11)      | NO   |     | NULL    |                |
+| cost          | float        | NO   |     | NULL    |                |
+| supplied_date | date         | YES  |     | NULL    |                |
+| supplier_id   | int(11)      | YES  | MUL | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe suppliers;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| supplier_id   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| supplier_name | varchar(100) | NO   |     | NULL    |                |
+| email         | varchar(50)  | YES  |     | NULL    |                |
+| phone_no      | varchar(15)  | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.12 sec)
+
+MariaDB [myhotel]> Describe booked_rooms;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| Customer_ID      | int(11)     | NO   |     | 0       |       |
+| Names            | varchar(50) | YES  |     | NULL    |       |
+| National_ID      | int(11)     | YES  |     | NULL    |       |
+| Room_No          | int(11)     | NO   |     | NULL    |       |
+| Room_Type        | varchar(20) | NO   |     | NULL    |       |
+| Price_Per_Night  | float       | NO   |     | NULL    |       |
+| Check_In_Date    | date        | NO   |     | NULL    |       |
+| Room_Total_Price | float       | YES  |     | NULL    |       |
+| Checked_In_By    | varchar(50) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+9 rows in set (0.08 sec)
+
+MariaDB [myhotel]> Describe food_orders;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Customer_ID | int(11)     | NO   |     | 0       |       |
+| Customer    | mediumtext  | YES  |     | NULL    |       |
+| food_ID     | int(11)     | NO   |     | NULL    |       |
+| food_name   | varchar(50) | NO   |     | NULL    |       |
+| price       | float       | NO   |     | NULL    |       |
+| Quantity    | float       | YES  |     | NULL    |       |
+| Time        | time        | NO   |     | NULL    |       |
+| Date        | date        | NO   |     | NULL    |       |
+| State       | varchar(20) | NO   |     | NULL    |       |
+| Amount_Paid | float       | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe occupied_rooms;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| Customer_ID        | int(11)     | NO   |     | 0       |       |
+| Names              | varchar(50) | YES  |     | NULL    |       |
+| National_ID        | int(11)     | YES  |     | NULL    |       |
+| Room_No            | int(11)     | NO   |     | NULL    |       |
+| Room_Type          | varchar(20) | NO   |     | NULL    |       |
+| Price_Per_Night    | float       | NO   |     | NULL    |       |
+| Check_In_Date      | date        | NO   |     | NULL    |       |
+| Room_Total_Price   | float       | YES  |     | NULL    |       |
+| Food_Total_Payment | float       | YES  |     | NULL    |       |
+| Extra_Payments     | float       | YES  |     | NULL    |       |
+| Checked_In_By      | varchar(50) | YES  |     | NULL    |       |
++--------------------+-------------+------+-----+---------+-------+
+11 rows in set (0.07 sec)
+
+MariaDB [myhotel]> Describe product_supplier;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| product_id    | int(11)      | NO   |     | 0       |       |
+| product_name  | varchar(100) | NO   |     | NULL    |       |
+| unit          | int(11)      | NO   |     | NULL    |       |
+| category      | varchar(50)  | NO   |     | NULL    |       |
+| alert_unit    | int(11)      | NO   |     | NULL    |       |
+| cost          | float        | NO   |     | NULL    |       |
+| supplied_date | date         | YES  |     | NULL    |       |
+| supplier_id   | int(11)      | YES  |     | NULL    |       |
+| supplier_name | varchar(100) | NO   |     | NULL    |       |
+| email         | varchar(50)  | YES  |     | NULL    |       |
+| phone_no      | varchar(15)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+11 rows in set (0.08 sec)
+
+MariaDB [myhotel]> Describe room_food_customers;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| Customer_ID      | int(11)     | NO   |     | 0       |       |
+| Names            | varchar(50) | YES  |     | NULL    |       |
+| Room_No          | int(11)     | NO   |     | NULL    |       |
+| National_ID      | int(11)     | YES  |     | NULL    |       |
+| Room_Customer_ID | int(11)     | NO   |     | 0       |       |
+| Customer         | mediumtext  | YES  |     | NULL    |       |
+| Food_ID          | int(11)     | YES  |     | NULL    |       |
+| food_name        | varchar(50) | NO   |     | NULL    |       |
+| price            | float       | NO   |     | NULL    |       |
+| Quantity         | float       | YES  |     | NULL    |       |
+| Time             | time        | NO   |     | NULL    |       |
+| Date             | date        | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+12 rows in set (0.08 sec)

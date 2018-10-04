@@ -1,0 +1,3 @@
+# List of generated media files. The columns are tab-separated:
+# id | media file type | display name | media file path
+58	windows	Windows	E:\Masomo\code red\ColourClicks_windows-x64_1_0.exe
